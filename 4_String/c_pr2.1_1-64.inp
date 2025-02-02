@@ -1,0 +1,114 @@
+[INPUT]
+topfile      = ../../../7l1q/1_set/toppar/top_all36_prot.rtf
+parfile      = ../../../7l1q/1_set/toppar/par_all36m_prot.prm, ../../../7l1q/1_set/toppar/par_all36_na_mod.prm
+strfile      = ../../../7l1q/1_set/toppar/toppar_water_ions.str, ../../../7l1q/1_set/toppar/toppar_all36_na_nad_ppi_mod.str
+psffile      = ../../../7l1q/1_set/vmd_build/ionized.psf
+pdbfile      = ../../../q2r_tmd/1_inp/7l1r_eq15_modifit.pdb
+fitfile      = ../../../q2r_tmd/1_inp/7l1r_eq15_modifit.pdb
+
+reffile      = ../../8_rpath/cv2/o_{}.pdb
+rstfile      = ../../11_pr1/cv2/rst/r_pr1.2_{}.rst
+
+[OUTPUT]
+logfile       = ./log/l_pr2.1_{}.log
+rstfile       = ./rst/r_pr2.1_{}.rst
+dcdfile       = ./dcd/d_pr2.1_{}.dcd
+rpathfile     = ./rpath/o_pr2.1_{}.rpath
+rpathlogfile  = ./rpath/o_pr2.1_1-64.rpathlog
+
+[ENERGY]
+forcefield          = CHARMM
+electrostatic       = PME
+switchdist          = 10.0
+cutoffdist          = 12.0
+pairlistdist        = 13.5
+vdw_force_switch    = YES
+pme_nspline         = 4
+pme_max_spacing     = 1.2
+
+[DYNAMICS]
+integrator        = VVER 
+nsteps            = 5000000  
+timestep          = 0.002  
+eneout_period     = 1000  
+crdout_period     = 5000  
+rstout_period     = 500000
+nbupdate_period   = 10
+elec_long_period  = 2  
+thermostat_period = 10 
+barostat_period   = 10 
+
+[CONSTRAINTS]
+rigid_bond          = YES
+
+[ENSEMBLE]
+ensemble            = NPT
+tpcontrol           = BUSSI
+temperature         = 310.00
+group_tp            = YES
+
+[BOUNDARY]
+type                = PBC
+
+[SELECTION]
+group1         = \
+((sid:PROA   | sid:PROB    | sid:PROC    ) &\
+ (rno:107    | rno:115-117 | rno:130     | rno:132-137 | rno:139-142 |\
+ rno:162     | rno:164     | rno:170-177 | rno:199-207 | rno:209-210 |\
+ rno:227-232 | rno:235     | rno:261-262 | rno:265     | rno:271-272 |\
+ rno:275-285 | rno:288-289 | rno:291-292 | rno:295-296 | rno:299-300 |\
+ rno:320     | rno:322-329 | rno:332-333 | rno:335-339 | rno:341     |\
+ rno:347     | rno:349-352 | rno:354-355 | rno:359-369 | rno:376     |\
+ rno:380-381 | rno:383-384 | rno:387-388 | rno:391-392 | rno:394-406 |\
+ rno:408-409 | rno:422-425 ) & an:CA)    |\
+((sid:PROD   | sid:PROE    | sid:PROF    ) &\
+ (rno:95     | rno:103-105 | rno:122-130 | rno:153     | rno:159-166 |\
+ rno:170     | rno:190-196 | rno:199-201 | rno:215     | rno:217-222 |\
+ rno:225     | rno:252-253 | rno:255-256 | rno:259     | rno:262-263 |\
+ rno:266-267 | rno:269-277 | rno:279-284 | rno:286-287 | rno:290     |\
+ rno:307     | rno:309-316 | rno:318-319 | rno:322-326 | rno:328     |\
+ rno:333-334 | rno:336-339 | rno:341-342 | rno:347-348 | rno:350-352 |\
+ rno:354-355 | rno:357     | rno:364     | rno:368     | rno:371-372 |\
+ rno:375-377 | rno:379     | rno:381-397 | rno:400     | rno:404     |\
+ rno:408     | rno:412     | rno:414     | rno:417     | rno:419-421 |\
+ rno:423     | rno:449-451 | rno:454-455 | rno:469-470 ) & an:CA)    | \
+((sid:PROG   )  &\
+ (rno:6      | rno:8-9     | rno:13      | rno:15-17   | rno:19-20   |\
+ rno:22-27   | rno:29-30   | rno:32-34   | rno:36      | rno:87-93   |\
+ rno:100     | rno:123     | rno:131-132 | rno:145     | rno:182-185 |\
+ rno:249-250 | rno:252-254 | rno:257     | rno:263     | rno:266-267 |\
+ rno:269-270 | rno:273-287 ) & an:CA)    | \
+ ((rnam:ATP  | rnam:ADP)   & heavyatom)  | rnam:MG 
+
+group2         = (sid:PROD or sid:PROE or sid:PROF) and rno:2-80 and an:CA
+
+
+[RPATH]
+nreplica=64
+rpath_period = 1000
+rest_function = 1
+delta = 0.3
+fix_terminal = no
+avoid_shrinkage = NO
+use_restart  = YES # read CVs from restart files (default=YES)
+
+[FITTING]
+fitting_method = TR+ROT
+fitting_atom   = 2
+mass_weight    = NO
+ 
+[RESTRAINTS]
+nfunctions 		= 1
+
+function1  		= POSI
+constant1  		= 0.10 0.10 0.10 0.10 0.10 0.10 0.10 0.10\
+                  0.10 0.10 0.10 0.10 0.10 0.10 0.10 0.10\
+                  0.10 0.10 0.10 0.10 0.10 0.10 0.10 0.10\
+                  0.10 0.10 0.10 0.10 0.10 0.10 0.10 0.10\
+                  0.10 0.10 0.10 0.10 0.10 0.10 0.10 0.10\
+                  0.10 0.10 0.10 0.10 0.10 0.10 0.10 0.10\
+                  0.10 0.10 0.10 0.10 0.10 0.10 0.10 0.10\
+                  0.10 0.10 0.10 0.10 0.10 0.10 0.10 0.10
+                  
+select_index1     = 1
+pressure_position = yes

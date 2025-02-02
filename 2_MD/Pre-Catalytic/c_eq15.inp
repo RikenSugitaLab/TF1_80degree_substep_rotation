@@ -1,0 +1,548 @@
+[INPUT]
+topfile = ../1_set/toppar/top_all36_prot.rtf
+parfile = ../1_set/toppar/par_all36m_prot.prm, ../1_set/toppar/par_all36_na_mod.prm
+strfile = ../1_set/toppar/toppar_water_ions.str, ../1_set/toppar/toppar_all36_na_nad_ppi_mod.str
+psffile = ../1_set/vmd_build/ionized.psf
+pdbfile = ../1_set/vmd_build/ionized.pdb
+reffile = ../1_set/vmd_build/ionized.pdb
+rstfile = ./r_eq14.rst
+
+[OUTPUT]
+rstfile = r_eq15.rst
+dcdfile = d_eq15.dcd
+
+[ENERGY]
+forcefield       = CHARMM
+electrostatic    = PME
+switchdist       = 10.0
+cutoffdist       = 12.0
+pairlistdist     = 13.5
+vdw_force_switch = YES    
+
+[DYNAMICS]
+integrator       = VVER
+nsteps           = 2000000
+timestep         = 0.002
+eneout_period    = 5000
+crdout_period    = 5000
+rstout_period    = 500000
+nbupdate_period  = 10
+
+[CONSTRAINTS]
+rigid_bond       = YES
+
+[ENSEMBLE]
+ensemble         = NPT
+tpcontrol        = BUSSI
+temperature      = 310
+pressure         = 1.0
+group_tp         = YES
+
+[BOUNDARY]
+type             = PBC
+
+[SELECTION]
+# Structure
+group1  = (sid:PROA or sid:PROB or sid:PROC or sid:PROD or sid:PROE or sid:PROF) and backbone
+group2  = (sid:PROA or sid:PROB or sid:PROC or sid:PROD or sid:PROE or sid:PROF) and not backbone and not hydrogen
+group3  = (sid:HETA or sid:HETB or sid:HETC or sid:HETD or sid:HETE or sid:HETF or sid:HETG or sid:HETH or sid:HETI or sid:HETJ or sid:HETK or sid:HETL or sid:HETM) and not hydrogen
+group4  = sid:PROG and backbone
+group5  = sid:PROG and not backbone and not hydrogen
+group6  = (sid:PROD or sid:PROE or sid:PROF) and rno:2-11 and an:CA
+group7  = segid:HETA and rnam:ATP and resno:600 and an:O1B
+group8  = segid:HETA and rnam:ATP and resno:600 and an:O2A
+group9  = segid:HETA and rnam:ATP and resno:600 and an:O2B
+group10 = segid:HETA and rnam:ATP and resno:600 and an:O2G
+group11 = segid:HETA and rnam:ATP and resno:600 and an:O3G
+group12 = segid:HETA and rnam:ATP and resno:600 and an:N7
+group13 = segid:HETB and rnam:MG and resno:601 and an:MG
+group14 = segid:HETC and rnam:ATP and resno:600 and an:O1B
+group15 = segid:HETC and rnam:ATP and resno:600 and an:O2A
+group16 = segid:HETC and rnam:ATP and resno:600 and an:O2B
+group17 = segid:HETC and rnam:ATP and resno:600 and an:O2G
+group18 = segid:HETC and rnam:ATP and resno:600 and an:O3A
+group19 = segid:HETC and rnam:ATP and resno:600 and an:O3B
+group20 = segid:HETC and rnam:ATP and resno:600 and an:O3G
+group21 = segid:HETF and rnam:MG and resno:601 and an:MG
+group22 = segid:HETG and rnam:ATP and resno:500 and an:O1B
+group23 = segid:HETG and rnam:ATP and resno:500 and an:O1G
+group24 = segid:HETG and rnam:ATP and resno:500 and an:O2A
+group25 = segid:HETG and rnam:ATP and resno:500 and an:O2B
+group26 = segid:HETG and rnam:ATP and resno:500 and an:O2G
+group27 = segid:HETG and rnam:ATP and resno:500 and an:O3G
+group28 = segid:HETH and rnam:MG and resno:501 and an:MG
+group29 = segid:HETI and rnam:ADP and resno:501 and an:O1B
+group30 = segid:HETI and rnam:ADP and resno:501 and an:O2B
+group31 = segid:HETI and rnam:ADP and resno:501 and an:O3B
+group32 = segid:HETK and rnam:MG and resno:502 and an:MG
+group33 = segid:HETL and rnam:ATP and resno:500 and an:O1A
+group34 = segid:HETL and rnam:ATP and resno:500 and an:O1B
+group35 = segid:HETL and rnam:ATP and resno:500 and an:O1G
+group36 = segid:HETL and rnam:ATP and resno:500 and an:O2A
+group37 = segid:HETL and rnam:ATP and resno:500 and an:O2B
+group38 = segid:HETL and rnam:ATP and resno:500 and an:O2G
+group39 = segid:HETL and rnam:ATP and resno:500 and an:O3A
+group40 = segid:HETL and rnam:ATP and resno:500 and an:O3B
+group41 = segid:HETL and rnam:ATP and resno:500 and an:O3G
+group42 = segid:HETM and rnam:MG and resno:501 and an:MG
+group43 = segid:HETB and rnam:MG and resno:601 and an:MG
+group44 = segid:PROA and rnam:SER and resno:177 and an:N
+group45 = segid:PROA and rnam:THR and resno:173 and an:O
+group46 = segid:PROA and rnam:LYS and resno:175 and an:NZ
+group47 = segid:PROA and rnam:GLN and resno:172 and an:N
+group48 = segid:PROA and rnam:SER and resno:177 and an:OG
+group49 = segid:HETA and rnam:ATP and resno:600 and an:O1B
+group50 = segid:HETA and rnam:ATP and resno:600 and an:O2G
+group51 = segid:PROA and rnam:THR and resno:176 and an:OG1
+group52 = segid:HETD and rnam:MG and resno:601 and an:MG
+group53 = segid:PROB and rnam:THR and resno:176 and an:N
+group54 = segid:PROB and rnam:SER and resno:177 and an:N
+group55 = segid:PROB and rnam:THR and resno:173 and an:N
+group56 = segid:PROB and rnam:GLY and resno:174 and an:N
+group57 = segid:PROB and rnam:LYS and resno:175 and an:N
+group58 = segid:PROB and rnam:LYS and resno:175 and an:NZ
+group59 = segid:PROB and rnam:GLN and resno:172 and an:N
+group60 = segid:HETE and rnam:ATP and resno:600 and an:O1B
+group61 = segid:HETE and rnam:ATP and resno:600 and an:O2G
+group62 = segid:PROC and rnam:THR and resno:176 and an:OG1
+group63 = segid:PROD and rnam:VAL and resno:162 and an:N
+group64 = segid:PROD and rnam:GLY and resno:163 and an:N
+group65 = segid:PROD and rnam:LYS and resno:164 and an:N
+group66 = segid:HETH and rnam:MG and resno:501 and an:MG
+group67 = segid:PROD and rnam:THR and resno:165 and an:N
+group68 = segid:PROD and rnam:ARG and resno:191 and an:NH1
+group69 = segid:PROD and rnam:LYS and resno:164 and an:NZ
+group70 = segid:HETG and rnam:ATP and resno:500 and an:O1G
+group71 = segid:HETG and rnam:ATP and resno:500 and an:O2B
+group72 = segid:PROD and rnam:THR and resno:165 and an:OG1
+group73 = segid:PROE and rnam:GLY and resno:161 and an:N
+group74 = segid:PROE and rnam:VAL and resno:162 and an:N
+group75 = segid:PROE and rnam:GLY and resno:163 and an:N
+group76 = segid:PROE and rnam:LYS and resno:164 and an:N
+group77 = segid:HETK and rnam:MG and resno:502 and an:MG
+group78 = segid:PROE and rnam:THR and resno:165 and an:OG1
+group79 = segid:HETI and rnam:ADP and resno:501 and an:O3B
+group80 = segid:PROF and rnam:THR and resno:165 and an:N
+group81 = segid:PROF and rnam:VAL and resno:166 and an:N
+group82 = segid:PROF and rnam:VAL and resno:162 and an:N
+group83 = segid:PROF and rnam:GLY and resno:163 and an:N
+group84 = segid:PROF and rnam:LYS and resno:164 and an:N
+group85 = segid:HETM and rnam:MG and resno:501 and an:MG
+group86 = segid:PROB and rnam:ARG and resno:365 and an:NH1
+group87 = segid:PROF and rnam:THR and resno:165 and an:OG1
+group88 = segid:PROF and rnam:ARG and resno:191 and an:NH1
+group89 = segid:PROF and rnam:GLY and resno:161 and an:N
+group90 = segid:HETL and rnam:ATP and resno:500 and an:O1G
+group91 = segid:HETL and rnam:ATP and resno:500 and an:O2B
+
+# AXP adenine ring
+group92 = sid:HETA and rnam:ATP and resno:600 and (an:N1 or an:C2 or an:N3 or an:C4 or an:C5 or an:C6)
+group93 = sid:HETC and rnam:ATP and resno:600 and (an:N1 or an:C2 or an:N3 or an:C4 or an:C5 or an:C6)
+group94 = sid:HETE and rnam:ATP and resno:600 and (an:N1 or an:C2 or an:N3 or an:C4 or an:C5 or an:C6)
+group95 = sid:HETG and rnam:ATP and resno:500 and (an:N1 or an:C2 or an:N3 or an:C4 or an:C5 or an:C6)
+group96 = sid:HETI and rnam:ADP and resno:501 and (an:N1 or an:C2 or an:N3 or an:C4 or an:C5 or an:C6)
+group97 = sid:HETL and rnam:ATP and resno:500 and (an:N1 or an:C2 or an:N3 or an:C4 or an:C5 or an:C6)
+# PHE, AXP around 7Å 
+group98 = sid:PROA and rnam:PHE and resno:349 and (an:CD1 or an:CD2 or an:CE1 or an:CE2 or an:CG or an:CZ)
+group99 = sid:PROB and rnam:PHE and resno:349 and (an:CD1 or an:CD2 or an:CE1 or an:CE2 or an:CG or an:CZ)
+group100 = sid:PROC and rnam:PHE and resno:349 and (an:CD1 or an:CD2 or an:CE1 or an:CE2 or an:CG or an:CZ)
+group101 = sid:PROD and rnam:PHE and resno:414 and (an:CD1 or an:CD2 or an:CE1 or an:CE2 or an:CG or an:CZ)
+group102 = sid:PROD and rnam:PHE and resno:420 and (an:CD1 or an:CD2 or an:CE1 or an:CE2 or an:CG or an:CZ)
+group103 = sid:PROE and rnam:PHE and resno:414 and (an:CD1 or an:CD2 or an:CE1 or an:CE2 or an:CG or an:CZ)
+group104 = sid:PROE and rnam:PHE and resno:420 and (an:CD1 or an:CD2 or an:CE1 or an:CE2 or an:CG or an:CZ)
+group105 = sid:PROF and rnam:PHE and resno:420 and (an:CD1 or an:CD2 or an:CE1 or an:CE2 or an:CG or an:CZ)
+# TYR AXP around 5Å 
+group106 = sid:PROD and rnam:TYR and resno:341 and (an:CD1 or an:CD2 or an:CE1 or an:CE2 or an:CG or an:CZ)
+group107 = sid:PROE and rnam:TYR and resno:341 and (an:CD1 or an:CD2 or an:CE1 or an:CE2 or an:CG or an:CZ)
+group108 = sid:PROF and rnam:TYR and resno:341 and (an:CD1 or an:CD2 or an:CE1 or an:CE2 or an:CG or an:CZ)
+
+[RESTRAINTS]
+pressure_position = YES
+nfunctions    = 79
+function1     = POSI
+constant1     = 0.0
+select_index1 = 1
+
+function2     = POSI
+constant2     = 0.0
+select_index2 = 2
+
+function3     = POSI
+constant3     = 0.0
+select_index3 = 3
+
+function4     = POSI
+constant4     = 0.0
+select_index4 = 4
+ 
+function5     = POSI
+constant5     = 0.0
+select_index5 = 5
+
+function6     = POSI
+constant6     = 50.0
+select_index6 = 6
+function7     = DIST
+constant7     = 10.0
+reference7    = 0.0
+select_index7 = 43 7
+
+function8     = DIST
+constant8     = 10.0
+reference8    = 0.0
+select_index8 = 44 8
+
+function9     = DIST
+constant9     = 10.0
+reference9    = 0.0
+select_index9 = 45 9
+
+function10     = DIST
+constant10     = 10.0
+reference10    = 0.0
+select_index10 = 46 9
+
+function11     = DIST
+constant11     = 10.0
+reference11    = 0.0
+select_index11 = 43 10
+
+function12     = DIST
+constant12     = 10.0
+reference12    = 0.0
+select_index12 = 47 11
+
+function13     = DIST
+constant13     = 10.0
+reference13    = 0.0
+select_index13 = 48 12
+
+function14     = DIST
+constant14     = 10.0
+reference14    = 0.0
+select_index14 = 49 13
+
+function15     = DIST
+constant15     = 10.0
+reference15    = 0.0
+select_index15 = 50 13
+
+function16     = DIST
+constant16     = 10.0
+reference16    = 0.0
+select_index16 = 51 13
+
+function17     = DIST
+constant17     = 10.0
+reference17    = 0.0
+select_index17 = 52 14
+
+function18     = DIST
+constant18     = 10.0
+reference18    = 0.0
+select_index18 = 53 14
+
+function19     = DIST
+constant19     = 10.0
+reference19    = 0.0
+select_index19 = 54 15
+
+function20     = DIST
+constant20     = 10.0
+reference20    = 0.0
+select_index20 = 55 16
+
+function21     = DIST
+constant21     = 10.0
+reference21    = 0.0
+select_index21 = 56 16
+
+function22     = DIST
+constant22     = 10.0
+reference22    = 0.0
+select_index22 = 57 16
+
+function23     = DIST
+constant23     = 10.0
+reference23    = 0.0
+select_index23 = 58 16
+
+function24     = DIST
+constant24     = 10.0
+reference24    = 0.0
+select_index24 = 52 17
+
+function25     = DIST
+constant25     = 10.0
+reference25    = 0.0
+select_index25 = 56 18
+
+function26     = DIST
+constant26     = 10.0
+reference26    = 0.0
+select_index26 = 59 19
+
+function27     = DIST
+constant27     = 10.0
+reference27    = 0.0
+select_index27 = 59 20
+
+function28     = DIST
+constant28     = 10.0
+reference28    = 0.0
+select_index28 = 60 21
+
+function29     = DIST
+constant29     = 10.0
+reference29    = 0.0
+select_index29 = 61 21
+
+function30     = DIST
+constant30     = 10.0
+reference30    = 0.0
+select_index30 = 62 21
+
+function31     = DIST
+constant31     = 10.0
+reference31    = 0.0
+select_index31 = 63 22
+
+function32     = DIST
+constant32     = 10.0
+reference32    = 0.0
+select_index32 = 64 22
+
+function33     = DIST
+constant33     = 10.0
+reference33    = 0.0
+select_index33 = 65 22
+
+function34     = DIST
+constant34     = 10.0
+reference34    = 0.0
+select_index34 = 66 23
+
+function35     = DIST
+constant35     = 10.0
+reference35    = 0.0
+select_index35 = 64 24
+
+function36     = DIST
+constant36     = 10.0
+reference36    = 0.0
+select_index36 = 66 25
+
+function37     = DIST
+constant37     = 10.0
+reference37    = 0.0
+select_index37 = 67 25
+
+function38     = DIST
+constant38     = 10.0
+reference38    = 0.0
+select_index38 = 68 26
+
+function39     = DIST
+constant39     = 10.0
+reference39    = 0.0
+select_index39 = 69 27
+
+function40     = DIST
+constant40     = 10.0
+reference40    = 0.0
+select_index40 = 70 28
+
+function41     = DIST
+constant41     = 10.0
+reference41    = 0.0
+select_index41 = 71 28
+
+function42     = DIST
+constant42     = 10.0
+reference42    = 0.0
+select_index42 = 72 28
+
+function43     = DIST
+constant43     = 10.0
+reference43    = 0.0
+select_index43 = 73 29
+
+function44     = DIST
+constant44     = 10.0
+reference44    = 0.0
+select_index44 = 73 30
+
+function45     = DIST
+constant45     = 10.0
+reference45    = 0.0
+select_index45 = 74 30
+
+function46     = DIST
+constant46     = 10.0
+reference46    = 0.0
+select_index46 = 75 30
+
+function47     = DIST
+constant47     = 10.0
+reference47    = 0.0
+select_index47 = 76 30
+
+function48     = DIST
+constant48     = 10.0
+reference48    = 0.0
+select_index48 = 77 31
+
+function49     = DIST
+constant49     = 10.0
+reference49    = 0.0
+select_index49 = 78 31
+
+function50     = DIST
+constant50     = 10.0
+reference50    = 0.0
+select_index50 = 79 32
+
+function51     = DIST
+constant51     = 10.0
+reference51    = 0.0
+select_index51 = 78 32
+
+function52     = DIST
+constant52     = 10.0
+reference52    = 0.0
+select_index52 = 80 33
+
+function53     = DIST
+constant53     = 10.0
+reference53    = 0.0
+select_index53 = 81 33
+
+function54     = DIST
+constant54     = 10.0
+reference54    = 0.0
+select_index54 = 82 34
+
+function55     = DIST
+constant55     = 10.0
+reference55    = 0.0
+select_index55 = 83 34
+
+function56     = DIST
+constant56     = 10.0
+reference56    = 0.0
+select_index56 = 84 34
+
+function57     = DIST
+constant57     = 10.0
+reference57    = 0.0
+select_index57 = 85 35
+
+function58     = DIST
+constant58     = 10.0
+reference58    = 0.0
+select_index58 = 86 36
+
+function59     = DIST
+constant59     = 10.0
+reference59    = 0.0
+select_index59 = 85 37
+
+function60     = DIST
+constant60     = 10.0
+reference60    = 0.0
+select_index60 = 80 37
+
+function61     = DIST
+constant61     = 10.0
+reference61    = 0.0
+select_index61 = 87 37
+
+function62     = DIST
+constant62     = 10.0
+reference62    = 0.0
+select_index62 = 88 38
+
+function63     = DIST
+constant63     = 10.0
+reference63    = 0.0
+select_index63 = 83 39
+
+function64     = DIST
+constant64     = 10.0
+reference64    = 0.0
+select_index64 = 86 40
+
+function65     = DIST
+constant65     = 10.0
+reference65    = 0.0
+select_index65 = 89 41
+
+function66     = DIST
+constant66     = 10.0
+reference66    = 0.0
+select_index66 = 90 42
+
+function67     = DIST
+constant67     = 10.0
+reference67    = 0.0
+select_index67 = 91 42
+
+function68     = DIST
+constant68     = 10.0
+reference68    = 0.0
+select_index68 = 87 42
+
+function69     = DIST
+constant69     = 10.0
+reference69    = 0.0
+select_index69 = 92 98
+
+function70     = DIST
+constant70     = 10.0
+reference70    = 0.0
+select_index70 = 93 99
+
+function71     = DIST
+constant71     = 10.0
+reference71    = 0.0
+select_index71 = 94 100
+
+function72     = DIST
+constant72     = 10.0
+reference72    = 0.0
+select_index72 = 95 101
+
+function73     = DIST
+constant73     = 10.0
+reference73    = 0.0
+select_index73 = 95 102
+
+function74     = DIST
+constant74     = 10.0
+reference74    = 0.0
+select_index74 = 95 106
+
+function75     = DIST
+constant75     = 10.0
+reference75    = 0.0
+select_index75 = 96 103
+
+function76     = DIST
+constant76     = 10.0
+reference76    = 0.0
+select_index76 = 96 104
+
+function77     = DIST
+constant77     = 10.0
+reference77    = 0.0
+select_index77 = 96 107
+
+function78     = DIST
+constant78     = 10.0
+reference78    = 0.0
+select_index78 = 97 105
+
+function79     = DIST
+constant79     = 10.0
+reference79    = 0.0
+select_index79 = 97 108
