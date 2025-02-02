@@ -1,5 +1,5 @@
 # TF1_80degree_substep_rotation
-## The distortion-push mechanism for the γ-subunit rotation in F1-ATPase
+** The distortion-push mechanism for the γ-subunit rotation in F1-ATPase **
 
 Masahiro Motohashi<sup>1,2</sup> Mao Oide<sup>2,5</sup> Chigusa Kobayashi<sup>3</sup> Jaewoon Jung<sup>2,3</sup> Eiro Muneyuki<sup>1</sup> Yuji Sugita<sup>2,3,4,*</sup>
 
